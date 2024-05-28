@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Home page{% endblock %}
+{% block content %}
+    <div class="row">
+        {% for destination in destinations %}
+            <div class="col-4">
+                <div class="card mb-3">
+                    <img src="{{ destination.image }}"/>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {% set name = destination.name | length > 30 ? destination.name | slice(0, 30) ~ '...' : destination.name %}
+                            {{ name | upper }}
+                        </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-clock"></i>
+                            <strong class="float-right">{{ destination.duration }} days</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-euro-sign"></i>
+                            <strong>{{ destination.price | number_format(2, ',', ' ') }}</strong>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{{ url('app_destination', {id: destination.id }) }}" class="card-link offset-8">Details
+                            <i class="fa-solid fa-arrow-right"></i> </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block custom_styles %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{% endblock custom_styles %}

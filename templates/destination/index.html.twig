@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ destination.name | upper }}{% endblock %}
+{% block content %}
+<article>
+    <div class="row">
+        <div class="col-6">
+            <img src="{{ destination.image }}" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col-6">
+            <h1>{{ destination.name }}</h1>
+            {{ destination.description }}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <strong class="float-right">{{ destination.duration }} days</strong>
+                </li>
+                <li class="list-group-item">
+                    <i class="fa-solid fa-euro-sign"></i>
+                    <strong>{{ destination.price | number_format(2, ',', ' ') }}</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</article>
+{% endblock content %}
+{% block custom_styles %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{% endblock custom_styles %}

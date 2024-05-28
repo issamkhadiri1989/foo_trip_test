@@ -1,0 +1,49 @@
+{% extends 'admin.html.twig' %}
+{% block content %}
+    <main>
+        <h1>List of destinations</h1>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Operations</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for destination in destinations %}
+                        <tr>
+                            <th scope="row">{{ destination.id }}</th>
+                            <td>{{ destination.name }}</td>
+                            <td>{{ destination.description }}</td>
+                            <td>{{ destination.price | number_format(2, ',', ' ') }}&euro;</td>
+                            <td>{{ destination.duration }} days</td>
+                            <td>
+                                <form action="{{ url('admin_destination_remove', {id: destination.id}) }}" method="post">
+                                    <input type="hidden" name="__token" value="{{ csrf_token('delete__destination__'~destination.id) }}"/>
+                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                </form>
+                                <a href="{{ url('admin_destination_edit', {id: destination.id}) }}" class="btn btn-primary">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock content %}
+{% block custom_javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+            integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+            integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock custom_javascripts %}

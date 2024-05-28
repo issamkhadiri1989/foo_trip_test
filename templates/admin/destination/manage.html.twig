@@ -1,0 +1,29 @@
+{% extends 'admin.html.twig' %}
+{% form_theme form _self %}
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form) }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+{% endblock content %}
+
+{% block _destination_price_row %}
+<div>
+    {{ form_label(form) }}
+    <div class="input-group mb-3">
+        <span class="input-group-text">&euro;</span>
+        {{ form_widget(form)}}
+        <span class="input-group-text">.00</span>
+    </div>
+</div>
+{% endblock _destination_price_row %}
+
+{% block _destination_duration_row %}
+    <div>
+        {{ form_label(form) }}
+        <div class="input-group mb-3">
+            {{ form_widget(form)}}
+            <span class="input-group-text">Days</span>
+        </div>
+    </div>
+{% endblock _destination_duration_row %}
